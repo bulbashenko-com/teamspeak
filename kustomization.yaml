@@ -1,0 +1,10 @@
+# Kubernetes base for the TeamSpeak 6 server, consumed by bulbashenko-com/infra (Flux GitRepository pinned to
+# a commit). The deploying side supplies the namespace, the node pinning label and the Secret `teamspeak`.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deploy/k8s/teamspeak.yaml
+configMapGenerator:
+  - name: restore-once
+    files:
+      - deploy/k8s/restore-once.sh
