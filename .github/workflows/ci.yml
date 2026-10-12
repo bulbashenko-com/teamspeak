@@ -17,3 +17,13 @@ jobs:
       - run: kubectl kustomize . > /dev/null
       - run: |
           pipx run yamllint==1.37.1 -d '{rules: {key-duplicates: enable}}' .
+
+  # After a green push to main: opens or refreshes the production deploy PR in bulbashenko-com/infra (the owner merges it).
+  promote:
+    needs: manifests
+    if: github.event_name == 'push'
+    uses: bulbashenko-com/infra/.github/workflows/request-promote.yml@main
+    with:
+      app: teamspeak
+      sha: ${{ github.sha }}
+    secrets: inherit
