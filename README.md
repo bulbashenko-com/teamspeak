@@ -18,7 +18,7 @@ TeamSpeak 6 server of bulbashenko.com (`ts.bulbashenko.com`). This repo is the K
 
 ## Runbook
 
-**Upgrade.** Change the image tag here (PR). After it merges, CI opens the deploy PR `deploy/teamspeak` in infra; merging that rolls it out. TS6 is a beta: read the release notes, the server migrates its database on start.
+**Upgrade.** Change the image tag here (PR). After it merges, infra pins the commit on its `dev` branch and production gets it with the next release PR (there is no staging copy of teamspeak; see [infra docs/workflow.md](https://github.com/bulbashenko-com/infra/blob/dev/docs/workflow.md)). TS6 is a beta: read the release notes, the server migrates its database on start.
 
 **Admin.** The server password and the first ServerAdmin privilege key are kept by the owner (outside git). Web Query, from a machine with cluster access:
 ```
